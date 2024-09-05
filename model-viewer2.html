@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script>
+        function rotateTo(x, y, z) {
+            const model = document.querySelector('#myModel');
+            model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
+        }
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'rotateModel') {
+                rotateTo(event.data.x, event.data.y, event.data.z);
+            }
+        }, false);
+    </script>
+</head>
+<body>
+    <model-viewer 
+        id="myModel"
+        src="https://alinaworkaccount.github.io/3d1/model-viewer.glb"
+        alt="3D Model"
+        auto-rotate
+        style="width: 100%; height: 100%;">
+    </model-viewer>
+</body>
+</html>
