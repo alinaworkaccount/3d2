@@ -5,6 +5,7 @@
         function rotateTo(x, y, z) {
             const model = document.querySelector('#myModel');
             model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
+            <script> var player=GetPlayer(); player.SetVar("passed",true); </script>
         }
 
         window.addEventListener('message', (event) => {
