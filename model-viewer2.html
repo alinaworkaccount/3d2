@@ -6,8 +6,12 @@
             const model = document.querySelector('#myModel');
             model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
 
+            // get the Storyline player object
             var player = GetPlayer();
-            player.SetVar("locked", true);
+            // get the value of the "changingVar" variable from Storyline
+            var message = player.GetVar("changingtxt");
+            // reassign the value of the "changingVar" variable
+            player.SetVar("changingtxt", "goodbye");
         }
 
         window.addEventListener('message', (event) => {
