@@ -6,21 +6,25 @@
             const model = document.querySelector('#myModel');
             model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
 
-            // Ensure Storyline's GetPlayer() is available
-            if (typeof GetPlayer === 'function') {
-                // Get the Storyline player object
-                var player = GetPlayer();
-                
-                // Get the value of the "changingtxt" variable from Storyline
-                var message = player.GetVar("changingtxt");
-                
-                // Log the message (optional: just for debugging)
-                console.log("Current changingtxt value:", message);
+            // Check if GetPlayer is available and handle errors gracefully
+            try {
+                if (typeof GetPlayer === 'function') {
+                    // Get the Storyline player object
+                    var player = GetPlayer();
+                    
+                    // Get the value of the "changingtxt" variable from Storyline
+                    var message = player.GetVar("changingtxt");
+                    
+                    // Log the message (optional)
+                    console.log("Current changingtxt value:", message);
 
-                // Reassign the value of the "changingtxt" variable
-                player.SetVar("changingtxt", "goodbye");
-            } else {
-                console.error("GetPlayer is not available. Make sure this is running inside Storyline.");
+                    // Reassign the value of the "changingtxt" variable
+                    player.SetVar("changingtxt", "goodbye");
+                } else {
+                    console.error("GetPlayer is not available. Make sure this is running inside Storyline.");
+                }
+            } catch (error) {
+                console.error("Error while accessing Storyline's GetPlayer:", error);
             }
         }
 
