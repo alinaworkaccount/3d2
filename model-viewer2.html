@@ -5,7 +5,9 @@
         function rotateTo(x, y, z) {
             const model = document.querySelector('#myModel');
             model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
-            <script> var player=GetPlayer(); player.SetVar("locked",true); </script>
+
+            var player = GetPlayer();
+            player.SetVar("locked", true);
         }
 
         window.addEventListener('message', (event) => {
