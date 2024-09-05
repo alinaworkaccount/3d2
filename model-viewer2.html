@@ -6,14 +6,26 @@
             const model = document.querySelector('#myModel');
             model.cameraOrbit = `${x}rad ${y}rad ${z}m`;
 
+            // Ensure Storyline's GetPlayer() is available
             try {
-                var player = parent.GetPlayer();  // Use 'parent' to access Storyline from iframe
-                player.SetVar("changingtxt", "goodbye");
+                // Access Storyline player from the parent frame
+                var player = parent.GetPlayer();
+                if (player) {
+                    // Get the value of the "changingtxt" variable from Storyline
+                    var message = player.GetVar("changingtxt");
+                    console.log("Current changingtxt value:", message);
+
+                    // Set the value of the "changingtxt" variable
+                    player.SetVar("changingtxt", "goodbye");
+                } else {
+                    console.error("Player object not found.");
+                }
             } catch (error) {
                 console.error("Error accessing Storyline's GetPlayer:", error);
             }
         }
 
+        // Listen for messages from Storyline
         window.addEventListener('message', (event) => {
             if (event.data.type === 'rotateModel') {
                 rotateTo(event.data.x, event.data.y, event.data.z);
